@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+    <title>Node Authentication</title>
+    
+    <style>
+        body        { 
+            padding-top:100px; 
+            }
+    </style>
+</head>
+<body>
+<div class="container">
+
+
+    <h1><span class="signIn"></span> Login</h1>
+
+
+
+    
+    <form action="/login" method="post">
+        <div class="email">
+            <label>Email</label>
+            <input type="text" class="email1" name="email">
+        </div>
+        <div class="pass">
+            <label>Password</label>
+            <input type="password" class="pass1" name="password">
+        </div>
+
+        <button type="submit" class="btton">Login</button>
+    </form>
+
+    
+
+    <p>New Users?<a href="/signup">Signup</a></p>
+
+
+</div>
+</body>
+</html>
