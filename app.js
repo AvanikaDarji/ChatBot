@@ -1,24 +1,78 @@
 var express = require("express");
 var app = express();
+var port = 3000;
 var mongoose = require("mongoose");
-var passport = require('passport');
-var flash    = require('connect-flash');
-var morgan       = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser   = require('body-parser');
-var expressSession = require('express-session');
+
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/Users')
+  .then(() =>  console.log('connection succesful'))
+  .catch((err) => console.error(err));
+var Schema = new mongoose.Schema({
+  email: String,
+  password: String
+});
+
+//var dbURI = 'mongodb://localhost/Users';
+
+//mongoose.connect(dbURI);
+
+ 
+var User = mongoose.model('User',Schema);
+
+ // var User = require('./Application/models/User.js');
+
+// set up our express application
+// get information from html forms
+
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.set('view engine', 'ejs'); // set up ejs for templating
+
+//home page
+    app.get('/', function(req, res) {
+     
+       res.render('index.ejs');
+    });
+
+   
+    // show the login form
+    app.get('/login', function(req, res) {
+        res.render('login.ejs')
+    });
+
+
+    // show the signup form
+    app.get('/signup', function(req, res) {
+        res.render('signup.ejs')
+    });
+
+    // process the signup form
+
+app.post('/signup', (req, res) => {
+  var userData = new User(req.body);
+  userData.save()
+    .then(item => {
+      res.send("Data saved to database");
+    })
+    .catch(err => {
+      res.status(400).send("unable to save to database");
+    });
+});
+
+app.listen(port, () => {
+  console.log("Server listening on port " + port);
+});
+
+
+module.exports = app;
+
+
 
 //var configDB = require('./config/db.js');
 
 //var dbURI = 'mongodb://localhost/Users';
-
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/node-auth')
-  .then(() =>  console.log('connection succesful'))
-  .catch((err) => console.error(err));
-
-  var User = require('./Application/models/User');
-
 //mongoose.connect(configDB.url);
 
 //mongoose.connection.on('connected', function() {
@@ -26,33 +80,7 @@ mongoose.connect('mongodb://localhost/node-auth')
 //});
 
 
-// set up our express application
-app.use(morgan('dev')); // log every request to the console
-app.use(cookieParser()); // read cookies (needed for auth)
-app.use(bodyParser()); // get information from html forms
 
-app.set('view engine', 'ejs'); // set up ejs for templating
-
-
-// Configuring Passport
-app.use(expressSession({secret: 'mySecretKey'}));
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
-app.use(flash()); // use connect-flash for flash messages stored in session
-
-// routes ======================================================================
-require('./Application/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
-//require('./config/passport')(passport);
-// launch ======================================================================
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
-});
-
-
-module.exports = app;
 
 
 
