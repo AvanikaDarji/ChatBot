@@ -19,10 +19,7 @@ var Schema = new mongoose.Schema({
  
 var User = mongoose.model('User',Schema);
 
- // var User = require('./Application/models/User.js');
-
-// set up our express application
-// get information from html forms
+ 
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -43,12 +40,12 @@ app.set('view engine', 'ejs'); // set up ejs for templating
     });
 
 
-    // show the signup form
-    app.get('/signup', function(req, res) {
+// show the signup form
+     app.get('/signup', function(req, res) {
         res.render('signup.ejs')
     });
 
-    // process the signup form
+// process the signup form
 
 app.post('/signup', (req, res) => {
   var userData = new User(req.body);
@@ -64,8 +61,6 @@ app.post('/signup', (req, res) => {
 app.listen(port, () => {
   console.log("Server listening on port " + port);
 });
-
-
 module.exports = app;
 
 
@@ -79,7 +74,10 @@ module.exports = app;
   //  console.log('Mongoose is connected to ' + configDB.url);
 //});
 
+// var User = require('./Application/models/User.js');
 
+// set up our express application
+// get information from html forms
 
 
 
