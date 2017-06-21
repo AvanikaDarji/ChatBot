@@ -76,36 +76,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-/*//home page
-    app.get('/', function(req, res) {
-     
-       res.render('index.ejs');
-    });
 
-   
-    // show the login form
-    app.get('/login', function(req, res) {
-        res.render('login.ejs');
-    });
-
-
-// show the signup form
-     app.get('/signup', function(req, res) {
-        res.render('signup.ejs')
-    });
-
-// process the signup form
-
-app.post('/signup', function(req, res) {
-  var userData = new User(req.body);
-  userData.save()
-    .then(item => {
-      res.send("You have registered successfully");
-    })
-    .catch(err => {
-      res.status(400).send("unable to save to database");
-    });
-});*/
 
 app.listen(port, () => {
   console.log("Server listening on port " + port);

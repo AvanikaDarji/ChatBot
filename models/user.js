@@ -1,7 +1,7 @@
 
 
 var mongoose = require('mongoose');
-var bcrypt = require('bcryptjs');
+//var bcrypt = require('bcryptjs');
 //mongoose.connect('mongodb://localhost/Users');
 
 var UserSchema = mongoose.Schema({
@@ -19,10 +19,8 @@ var UserSchema = mongoose.Schema({
 		type: String
 	}
 });
-var User = module.exports = mongoose.model('User', UserSchema);
-
-
-
+var User =  mongoose.model('User', UserSchema);
+module.exports = User;
 
 
 

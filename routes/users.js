@@ -14,47 +14,40 @@ router.get('/signup', function(req,res){
 router.get('/login', function(req,res){
     res.render('login');
 });
+router.post('/login', function(req,res){
+   var username = req.body.username;
+	var password = req.body.password;
+	User.findOne({username:username, password:password}, function(err, user){
+		if(err){
+			console.log(err);
+			return res.status(500).send();
+		}
+		if(!user){
+			return res.status(404).send();
+		}else
+		return res.status(200).send();
+	})
 
+});
 //Post register 
 router.post('/register', function(req, res){
 	var name = req.body.name;
 	var email = req.body.email;
 	var username = req.body.username;
 	var password = req.body.password;
-	var password2 = req.body.password2;
+	
+	var newUser = new User();
+	newUser.name = name;
+	newUser.email = email;
+	newUser.username = username;
+	newUser.password = password;
 
-    // Validation
-	req.checkBody('name', 'Name is required').notEmpty();
-	req.checkBody('email', 'Email is required').notEmpty();
-	req.checkBody('email', 'Email is not valid').isEmail();
-	req.checkBody('username', 'Username is required').notEmpty();
-	req.checkBody('password', 'Password is required').notEmpty();
-	req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
-
-	var errors = req.validationErrors();
-
-	if(errors){
-		res.render('register',{
-			errors:errors
-		});
-	} else {
-		var newUser = new User({
-			name: name,
-			email:email,
-			username: username,
-			password: password
-		});
-
-		User.createUser(newUser, function(err, user){
-			if(err) throw err;
-			console.log(user);
-		});
-
-		req.flash('success_msg', 'You are registered and can now login');
-
-		res.redirect('/users/login');
-	}
-});
-
-
+	newUser.save(function(err, savedUser){
+		if(err){
+			console.log(err);
+			return res.status(500).send();
+		}
+return res.send("You have registered successfully");
+	})
+})
 module.exports = router;
