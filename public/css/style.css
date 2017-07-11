@@ -1500,3 +1500,23 @@ ul.ui.list>li.item a
         float: left;
     }
 }
+.heading
+{
+margin-top:4px;
+margin-left: 20px;
+
+}
+.heading1
+{
+margin-top:6px;
+}
+.logoutbutton
+{
+text-align: right;
+margin-top:6px;
+}
+.topcorner{
+   position:absolute;
+   top:0;
+   right:0;
+  }

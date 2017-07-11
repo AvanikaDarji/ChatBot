@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html>
+<html>
+    <head>
+    <meta name="google-site-verification"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=10">
+    <meta name="title" content=""/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta property="og:title" content=""/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="#"/>
+    <meta property="og:site_name" content="EatenBot "/>
+    <meta property="og:description" content=""/>
+    <meta property="og:image" content=""/>
+    <meta property="og:image:secure_url" content=""/>
+    <meta property="fb:app_id" content="594564557411885"/>
+    <link rel="apple-touch-icon-precomposed" href="/image/icon/favicon-152.png">
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta name="msapplication-TileImage" content="/image/icon/favicon-144.png">
+    <link rel="icon" href="/image/icon/favicon-32.png" sizes="32x32">
+    <link rel="icon" href="/image/icon/favicon-48.png" sizes="48x48">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="icon" sizes="16x16 24x24 32x32 64x64" href="/favicon.ico">
+    <title>EatenBot | Chatbot solution for restaurant reservations</title>
+
+
+    
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/style.css">
+
+   <script type="application/javascript" src="/js/jquery.min.js"> </script>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/style.css">
+  <script type="application/javascript" src="/js/bootstrap.js"></script>
+   <script type="text/javascript" src="js/on-screen.umd.js"></script>
+</head>
+   
+    <body>
+    <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-96153188-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+
+
+    <div class="ui appbar">
+    <div class="content container">
+    <div class="logo ">
+    <a href="#">
+    <img class="logo" src="img/logo_full.png" alt="EtenBot ">
+    </a>
+    </div>
+    <div class="nav list ">
+    <ul class="ui list">
+    <li class="item">
+    <a href="#">About Us</a>
+    </li>
+    <li class="item">
+    <a href="#">How Its Work</a>
+    </li>
+    <li class=" item">
+    <a href="/users/signup">Sign Up</a>
+    </li>
+    <li class="login item">
+    <a href="/users/login">Log In</a>
+    </li>
+    <li class=" item">
+    <a href="/auth/facebook">Facebook Login</a>
+    </li>
+    <li class=" item">
+    <a href="#">Gmail Login</a>
+    </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+    <div class="ui mobile appbar shown">
+    <div class="logo container">
+    <a href="#">
+    <img class="logo" src="img/logo_full.png" alt="EatenBot ">
+    </a>
+    </div>
+    <div class="toggle container">
+    <div class="animated menu icon">
+    <span></span>
+    <span></span>
+    <span></span>
+    </div>
+    </div>
+    </div>
+
+    <div class="ui mobile inverted slidemenu">
+
+    <div class="nav list container">
+    <ul class="ui list">
+    <li class="item">
+    <a href="#">About Us</a>
+    </li>
+    <li class="item">
+    <a href="#">How Its Work</a>
+    </li>
+    <li class="item">
+    <a href="#">Sign Up</a>
+    </li>
+    </ul>
+    </div>
+    <div class="buttons container">
+    <a class="ui flat signup button" href="#">
+    Start Now </a>
+    <a class="ui flat secondary login button" href="#">
+    Log In </a>
+    </div>
+    </div>
+
+    <div class="ui mobile hidden dimmer"></div>
+    <script type="text/javascript">
+  $(function() {
+    var mAppbar = $('.ui.mobile.appbar'),
+        mSlidemenu = $('.ui.slidemenu'),
+        mSlidemenuToggle = mAppbar.find('.toggle .icon'),
+        mSlidemenuDimmer = mSlidemenu.next('.ui.dimmer'),
+        heroimage = $('.ui.heroimage');
+
+    var lastScrollTop = 0,
+        heroimageEndPosY = heroimage.position().top + heroimage.height();
+
+    /**
+     * Check if screensize fall into mobile
+     * @return boolean Is mobile screen
+     */
+    function isMobile() {
+      return $(window).innerWidth() <= 768;
+    }
+
+    /**
+     * Animate slidemenu toggle icon
+     */
+    function animateToggleIcon() {
+      mSlidemenuToggle.toggleClass('open');
+    }
+
+    /**
+     * Hide appbar
+     */
+    function hideAppBar() {
+      mAppbar.removeClass('shown');
+    }
+
+    /**
+     * Show appbar
+     */
+    function showAppBar() {
+      mAppbar.addClass('shown');
+    }
+
+    /**
+     * Show/hide slidemenu dimmer
+     */
+    function toggleDimmer() {
+      mSlidemenuDimmer.toggleClass('hidden');
+      $('body').toggleClass('disable-scroll');
+    }
+
+    /**
+     * Open/close slidemenu
+     */
+    function toggleSlidemenu() {
+      mSlidemenu.toggleClass('open');
+      animateToggleIcon();
+      toggleDimmer();
+    }
+
+    /**
+     * Event function on slidemenu dimmer
+     */
+    mSlidemenuDimmer.click(function() {
+      if (isMobile()) {
+        toggleSlidemenu();
+      }
+    });
+
+    /**
+     * Event function on slidemenu toggle clicked
+     */
+    mSlidemenuToggle.click(function() {
+      if (isMobile()) {
+        toggleSlidemenu();
+      }
+    });
+
+    /**
+     * Event function on slidemenu nav list items clicked
+     */
+    mSlidemenu.find('.nav.list .list .item').click(function() {
+      if (isMobile()) {
+        toggleSlidemenu();
+      }
+    });
+
+    /**
+     * Event function on window scrolled
+     */
+    $(window).scroll(function() {
+      var _scrollTop = $(this).scrollTop();
+
+      if (isMobile()) {
+        if (_scrollTop >= heroimageEndPosY + 1) {
+          // Downward scroll
+          if (_scrollTop > lastScrollTop) {
+            if (_scrollTop >= 61) {
+              hideAppBar();
+            }
+          }
+          // Upward scroll
+          else {
+            showAppBar();
+          }
+        }
+      }
+
+      lastScrollTop = _scrollTop;
+    });
+
+    if (!mAppbar.hasClass('shown')) {
+      if (isMobile()) {
+        showAppBar();
+      }
+    }
+  });
+</script>
+
+    <div class="ui stickybar">
+    <div class="content container">
+    <div class="logo col-lg-8">
+    <a href="#">
+    <img class="logo" src="img/logo_full.png" alt="EatenBot ">
+    </a>
+    </div>
+    <div class="nav list col-lg-4">
+    <ul class="ui list pull-right">
+    <li class="ai item">
+    <a href="#ai">About Us</a>
+    </li>
+    <li class="features item">
+    <a href="#features">How Its Work</a>
+    </li>
+   
+    </ul>
+    <div class="nav indicator"></div>
+    </div>
+    <div class="button ">
+    <a class="ui new cta button signup item" href="#">
+    Login </a>
+    </div>
+    </div>
+    </div>
+    
+
+    <section class="ui heroimage">
+        <div class="background placeholder" data-large="img/heroimage_landing_large_compressed.jpg" data-mid="img/heroimage_landing_mid_compressed.jpg">
+            <img src="img/heroimage_landing_large_compressed.jpg" class="img-tiny">
+            <div class="aspect ratio"></div>
+            <img src="img/heroimage_landing_large_compressed.jpg" class="loaded">
+        </div>
+        <div class="content container">
+            <div class="text">
+                <h1 class="headline">
+                    Chatbot built for restaurants <div class="sub headline">
+                    No coding required. Set up in 3 minutes! </div>
+                </h1>
+                <div class="cta">
+                    <a class="ui big cta new button" href="#">
+                        <svg class="ic_fb_messenger" viewbox="0 0 24 24" xmlns="#">
+                            <g>
+                                <path class="container" d="M0 0h24v24H0z"/>
+                                <path class="main" d="M6.09935263,17.7976991 C4.00284967,16.1852713 2.76707107,13.696128 2.75,11.0513299 C2.9083587,6.04068897 7.09408918,2.10453455 12.1049995,2.25412643 C17.1159099,2.10453455 21.3016404,6.04068897 21.4599991,11.0513299 C21.3016404,16.0619709 17.1159099,19.9981253 12.1049995,19.8485334 C11.1876196,19.8493702 10.2745697,19.7227744 9.39202391,19.4723754 L6.09935263,21.2449559 L6.09935263,17.7976991 Z M6.09935263,14.0219481 L11.1568751,8.64752532 L13.5709854,11.1956097 L18.1789217,8.64623711 L13.1548928,13.9871663 L10.6325726,11.5086454 L6.09935263,14.0219481 Z" style="fill-rule: evenodd;"/>
+                            </g>
+                        </svg>
+                        Start For Free </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="bbb ai" id="ai">
+        <div class="ui text container">
+            <h3 class="header">Our AI robot extracts relevant information and replies automatically</h3>
+            <div class="playground" id="playground">
+<div class="messenger block left-of-3">
+<div class="user message">
+<div class="bounce user avatar bounced"></div>
+<div class="bounce user typing bubble bounced typed">
+<span></span>
+<span></span>
+<span></span>
+</div>
+<div class="bounce user bubble bounced">Table for this Friday, 7pm please.</div>
+</div>
+<div class="bot message">
+<div class="bounce bot bubble bounced">How many of you are coming?</div>
+<div class="bounce bot avatar bounced"></div>
+</div>
+<div class="user message">
+<div class="bounce user avatar bounced"></div>
+<div class="bounce user typing bubble bounced typed">
+<span></span>
+<span></span>
+<span></span>
+</div>
+<div class="bounce user bubble bounced">Oh table for 4. Thx!</div>
+</div>
+</div>
+<div class="fadein chatbot block fadedin center">
+<div class="logo container">
+<svg class="logo base" viewBox="0 0 200 200" xmlns="#">
+<g>
+<rect class="container" width="200" height="200"></rect>
+<path class="main" d="M139.2,97.7c2.5,0,4.9,0.4,7.2,1.1c1.7-11,11.3-19.5,22.8-19.5V35.4c0-10.1-8.3-18.4-18.4-18.4H40.1
+              	c-10.1,0-18.4,8.3-18.4,18.4v106.1c0,10.1,8.3,18.4,18.4,18.4h4.6V183l23.1-23.1h39.2c0-9,5.8-16.7,13.8-19.5
+              	c-4.3-4.5-6.9-10.6-6.9-17.4C113.8,109.1,125.2,97.7,139.2,97.7z"></path>
+</g>
+</svg>
+<svg class="logo circle" viewBox="0 0 200 200" xmlns="#">
+<g>
+<rect class="container" width="200" height="200"></rect>
+<circle class="main" cx="169.2" cy="102.3" r="9.2"></circle>
+</g>
+</svg>
+<svg class="logo circle" viewBox="0 0 200 200" xmlns="#">
+<g>
+<rect class="container" width="200" height="200"></rect>
+<circle class="main" cx="139.2" cy="123.1" r="11.5"></circle>
+</g>
+</svg>
+<svg class="logo circle" viewBox="0 0 200 200" xmlns="#">
+<g>
+<rect class="container" width="200" height="200"></rect>
+<circle class="main" cx="155.3" cy="148.4" r="4.6"></circle>
+</g>
+</svg>
+<svg class="logo circle" viewBox="0 0 200 200" xmlns="#">
+<g>
+<rect class="container" width="200" height="200"></rect>
+<circle class="main" cx="127.7" cy="159.9" r="6.9"></circle>
+</g>
+</svg>
+</div>
+</div>
+<div class="fadeout right-of-3 data block fadedout">
+<ul class="fadein ui data list fadedin">
+<li class="data item">
+<div class="bounce positive icon bounced">
+<svg class="ic_done" viewBox="0 0 24 24" xmlns="#">
+<g>
+<path class="container" d="M0 0h24v24H0z"></path>
+<path class="main" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"></path>
+</g>
+</svg>
+</div>
+<div class="fadein content fadedin">
+Date </div>
+</li>
+<li class="data item">
+<div class="bounce positive icon bounced">
+<svg class="ic_done" viewBox="0 0 24 24" xmlns="#">
+<g>
+<path class="container" d="M0 0h24v24H0z"></path>
+<path class="main" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"></path>
+</g>
+</svg>
+</div>
+<div class="fadein content fadedin">
+Time </div>
+</li>
+<li class="data item">
+<div class="bounce icon positive bounced">
+<svg class="ic_done" viewBox="0 0 24 24" xmlns="#">
+<g>
+<path class="container" d="M0 0h24v24H0z"></path>
+<path class="main" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"></path>
+</g>
+</svg>
+<svg class="ic_close" viewBox="0 0 24 24" xmlns="#">
+<g>
+<path class="container" d="M0 0h24v24H0z"></path>
+<path class="main" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+</g>
+</svg>
+</div>
+<div class="fadein content fadedin">
+Party size </div>
+</li>
+</ul>
+</div>
+<div class="bounce right-of-3 booking block bounced">
+<div class="update item">
+<div class="update type">
+<svg class="ic_event_available" viewBox="0 0 24 24" xmlns="#">
+<g>
+<path class="container" d="M0 0h24v24H0z"></path>
+<path class="main" d="M16.53 11.06L15.47 10l-4.88 4.88-2.12-2.12-1.06 1.06L10.59 17l5.94-5.94zM19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"></path>
+</g>
+</svg>
+</div>
+<div class="update details">
+<div class="booking details bounced">
+<span class="date">16 Jun</span>
+<span class="time">19:00</span>
+ <span class="name">John Doe</span>
+</div>
+<div class="update message update">
+<span class="create content">New booking created</span>
+</div>
+<div class="update time">
+A few seconds ago </div>
+</div>
+<div class="update status">
+<svg class="fiber-new" viewBox="0 0 24 24" xmlns="#">
+<defs>
+<path d="M0 0h24v24H0V0z" id="a"></path>
+</defs>
+<clipPath id="b">
+<use overflow="visible" xlink:href="#"></use>
+</clipPath>
+<path class="main" clip-path="url(#b)" d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zM8.5 15H7.3l-2.55-3.5V15H3.5V9h1.25l2.5 3.5V9H8.5v6zm5-4.74H11v1.12h2.5v1.26H11v1.11h2.5V15h-4V9h4v1.26zm7 3.74c0 .55-.45 1-1 1h-4c-.55 0-1-.45-1-1V9h1.25v4.51h1.13V9.99h1.25v3.51h1.12V9h1.25v5z"></path>
+</svg>
+</div>
+</div>
+</div>
+</div>
+        </div>
+        <div class="animation control shown">
+            <a class="ui new link">
+                Replay Animation <span class="icon">
+                <svg class="ic_replay" viewBox="0 0 24 24" xmlns="#">
+                    <g>
+                        <path class="container" d="M0 0h24v24H0z"></path>
+                        <path class="main" d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"></path>
+                    </g>
+                </svg>
+                </span>
+            </a>
+        </div>
+        </section>
+       
+            <div class="ui text container">
+                <h3 class="header"> </h3>
+                <div class="experiences ">
+                    <div class="zoom experience block zoomed">
+                        <div class="figure"></div>
+                        <h4 class="description"></h4>
+                    </div>
+                    <div class="zoom experience block zoomed">
+                        <div class="figure"></div>
+                        <h4 class="description"></h4>
+                    </div>
+                    <div class="zoom experience block zoomed">
+                        <div class="figure"></div>
+                        <h4 class="description"></h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="bbb chatbot feature">
+            <div class="session heroimage">
+                <div class="background placeholder" data-large="img/feature_3d_messenger_large_compressed.png">
+                    <img src="img/feature_3d_messenger_tiny_compressed.png" class="img-tiny loaded hidden">
+                    <div class="aspect ratio"></div>
+                    <img src="img/feature_3d_messenger_large_compressed.png" class="loaded"></div>
+            </div>
+            <div class="content container">
+                <h1 class="header">Chatbot built for restaurants</h1>
+                <ul class="ui feature list">
+                    <li class="feature item">
+                        <div class="zoom icon zoomed">
+                            <svg class="ic_done" viewBox="0 0 24 24" xmlns="#">
+                                <g>
+                                    <path class="container" d="M0 0h24v24H0z"></path>
+                                    <path class="main" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"></path>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="content">
+                            Process booking automatically, 24/7 </div>
+                    </li>
+                    <li class="feature item">
+                        <div class="zoom icon zoomed">
+                            <svg class="ic_done" viewBox="0 0 24 24" xmlns="#">
+                                <g>
+                                    <path class="container" d="M0 0h24v24H0z"></path>
+                                    <path class="main" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"></path>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="content">
+                            Send auto-reminders before the reserved time </div>
+                    </li>
+                    <li class="feature item">
+                        <div class="zoom icon zoomed">
+                            <svg class="ic_done" viewBox="0 0 24 24" xmlns="#">
+                                <g>
+                                    <path class="container" d="M0 0h24v24H0z"></path>
+                                    <path class="main" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"></path>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="content">
+                            Send follow-up questionnaire to ask for feedbacks </div>
+                    </li>
+                </ul>
+                <div class="cta ">
+                    <a href="#" target="_blank" class="ui new facebook button">
+                        <svg class="ic_fb_messenger" viewBox="0 0 24 24" xmlns="#">
+                            <g>
+                                <path class="container" d="M0 0h24v24H0z"></path>
+                                <path class="main" d="M6.09935263,17.7976991 C4.00284967,16.1852713 2.76707107,13.696128 2.75,11.0513299 C2.9083587,6.04068897 7.09408918,2.10453455 12.1049995,2.25412643 C17.1159099,2.10453455 21.3016404,6.04068897 21.4599991,11.0513299 C21.3016404,16.0619709 17.1159099,19.9981253 12.1049995,19.8485334 C11.1876196,19.8493702 10.2745697,19.7227744 9.39202391,19.4723754 L6.09935263,21.2449559 L6.09935263,17.7976991 Z M6.09935263,14.0219481 L11.1568751,8.64752532 L13.5709854,11.1956097 L18.1789217,8.64623711 L13.1548928,13.9871663 L10.6325726,11.5086454 L6.09935263,14.0219481 Z" style="fill-rule: evenodd;"></path>
+                            </g>
+                        </svg>
+                        Try our hypothetical restaurant </a>
+                </div>
+            </div>
+        </section>
+        <section class="bbb brand feature">
+            <div class="session heroimage">
+                <div class="background placeholder" data-large="img/feature_3d_fbpage_anim_holder_large_compressed.png" data-anim="img/feature_3d_fbpage_anim.gif">
+                    <img src="img/feature_3d_fbpage_anim_holder_tiny_compressed.png" class="img-tiny loaded hidden">
+                    <div class="aspect ratio"></div>
+                    <img src="img/feature_3d_fbpage_anim_holder_large_compressed.png" class="loaded"><img src="img/feature_3d_fbpage_anim.gif" class="loaded"></div>
+            </div>
+            <div class="content container">
+                <h1 class="header">YOUR brand, not ours!</h1>
+                <div class="content">
+                    The chatbot will be connected to your own Facebook page. The conversation is between you and your customers. </div>
+                <div class="cta">
+                    <a class="ui big cta new button" href="#">
+                        Start Now </a>
+                </div>
+            </div>
+        </section>
+        <section class="bbb howitworks" id="how-it-works">
+            <div class="ui text container">
+                <h3 class="header">How it works?</h3>
+                <div class="steps ">
+                    <div class="zoom step block zoomed">
+                        <div class="step icon">
+                            <div class="icon ">
+                                <svg class="ic_line-pencilruler" viewBox="0 0 24 24" xmlns="#">
+                                    <g>
+                                        <path class="container" d="M0 0h24v24H0z"></path>
+                                        <path class="main pencil" d="M7.2107,22 C6.7542,21.9077 6.3128,21.7783 5.9255,21.504 C5.3422,21.0906 4.9982,20.5673 5.0008,19.8154 C5.0132,16.2688 5.0049,12.7219 5.0108,9.1754 C5.01308109,9.01128529 5.05149148,8.84968855 5.1233,8.7021 C5.729,7.47 6.3449,6.2432 6.9593,5.0158 C6.99627354,4.93374777 7.04399157,4.85697522 7.1012,4.7875 C7.2669,4.6047 7.5112,4.6475 7.646,4.8919 C7.7869,5.1465 7.9106,5.4107 8.0408,5.6711 C8.552,6.6941 9.0655,7.7162 9.5708,8.7424 C9.6280034,8.85912132 9.65873461,8.98703143 9.6608,9.117 C9.666,12.6638 9.6439,16.2112 9.678,19.7576 C9.6903,21.004 8.7359,21.8198 7.7435,21.9643 C7.70378069,21.9731324 7.66482505,21.9851033 7.627,22.0001 L7.2107,22.0001 L7.2107,22 Z M6.9917,17.3292 L6.9917,9.345 L5.68,9.345 L5.68,17.3292 L6.9916,17.3292 L6.9917,17.3292 Z M7.6799,9.3392 L7.6799,17.3207 L8.9907,17.3207 L8.9907,9.3391 L7.68,9.3391 L7.6799,9.3392 Z M9.0036,19.3446 L5.6665,19.3446 C5.6665,19.5246 5.6752,19.6901 5.6645,19.8546 C5.6382151,20.1570908 5.74889337,20.4554377 5.9661,20.6676 C6.11232211,20.8147938 6.27580905,20.9437635 6.453,21.0517 C7.2843,21.5531 8.3005,21.344 8.8148,20.5874 C9.0767,20.2027 8.9864,19.7767 9.0035,19.3445 L9.0036,19.3446 Z M7.3351,5.7374 C6.8365,6.7361 6.361,7.6887 5.8794,8.6534 L8.7932,8.6534 C8.3072,7.6816 7.8326,6.7323 7.3351,5.7374 Z M5.6751,18.6565 L8.9889,18.6565 L8.9889,18.012 L5.6747,18.012 L5.6747,18.6565 L5.6751,18.6565 Z" style="fill-rule: evenodd;"></path>
+                                        <path class="main ruler" d="M18.7484,2 C18.9468,2.1112 18.9993,2.2858 18.9993,2.5049 C18.9960333,8.8475 18.9960333,15.1902 18.9993,21.533 C18.9993,21.7642 18.9228,21.9188 18.7069,22.0001 L13.2506,22.0001 C13.0621,21.8931 13.0006,21.7301 13.0006,21.5163 C13.0038667,15.1739 13.0038667,8.83133333 13.0006,2.4886 C13.0006,2.2551 13.0606,2.083 13.292,2 L18.7481,2 L18.7484,2 Z M13.6784,11.9973 L13.6784,14.6687 C14.2194,14.6687 14.7461,14.6663 15.2724,14.6699 C15.4965,14.6715 15.6563,14.8148 15.6551,14.9963 C15.6539,15.1822 15.5001,15.323 15.2773,15.3307 C15.1109,15.3364 14.9442,15.3307 14.7773,15.3307 L13.6773,15.3307 L13.6773,18.0033 L13.9173,18.0033 C14.3683,18.0033 14.8194,17.9995 15.2705,18.0033 C15.495,18.0053 15.6552,18.1473 15.6548,18.3288 C15.6548,18.5143 15.5003,18.6531 15.2778,18.6648 C15.2156,18.6681 15.1529,18.664 15.0907,18.664 L13.6777,18.664 L13.6777,21.3224 L18.3213,21.3224 L18.3213,2.6785 L13.68,2.6785 L13.68,4.6685 C14.2161,4.6685 14.7359,4.6662 15.2557,4.6693 C15.4969,4.6707 15.6592,4.8101 15.6557,5.0003 C15.6516,5.1936 15.4922,5.3293 15.2531,5.3311 C14.8577,5.3342 14.462,5.3311 14.0666,5.3311 L13.6799,5.3311 L13.6799,8.0014 C14.2151,8.0014 14.7349,7.9993 15.2547,8.0022 C15.4955,8.0036 15.659,8.1422 15.6557,8.3322 C15.6525,8.5255 15.493,8.6607 15.2543,8.6644 C15.0464,8.6679 14.8382,8.6644 14.6299,8.6636 L13.6799,8.6636 L13.6799,11.3365 L13.9427,11.3365 C14.3938,11.3365 14.8448,11.3323 15.2959,11.3377 C15.4776791,11.3298329 15.6349354,11.4630936 15.657,11.6437 C15.6569841,11.8328342 15.507589,11.9881893 15.3186,11.9956 C15.2631065,11.9992366 15.2074531,11.9997707 15.1519,11.9972 L13.6789,11.9972 L13.6784,11.9973 Z" style="fill-rule: evenodd;"></path>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        <h4 class="step title">Set up</h4>
+                        <div class="step description">
+                            Teach our bot about your restaurant, such as opening hours and how many seats you want to sell through Facebook. </div>
+                    </div>
+                    <div class="zoom step block zoomed">
+                        <div class="step icon">
+                            <div class="icon ">
+                                <svg class="ic_line-refresh" viewBox="0 0 24 24" xmlns="#">
+                                    <g>
+                                        <path class="container" d="M0 0h24v24H0z"></path>
+                                        <path class="main" d="M4.15402205,12.1824256 C4.13907889,11.8681217 4.14054805,11.553252 4.15842356,11.2391012 C4.45852675,8.40012503 5.89902208,6.30970622 8.3817758,4.92693074 C9.58720456,4.25015757 10.9611938,3.93264254 12.3413373,4.0119161 C14.4539638,4.12195394 16.2304747,4.97144605 17.6668686,6.52277949 C17.8269236,6.69623913 17.8269236,6.89800851 17.6784726,7.02925364 C17.5241195,7.16630077 17.3299527,7.14799447 17.1552927,6.95792912 C16.6812659,6.43096321 16.1266945,5.98247793 15.5122277,5.62917221 C13.6091733,4.55550302 11.6186888,4.36073605 9.56708338,5.12900022 C7.54638854,5.88526027 6.14090526,7.29894638 5.29831552,9.27492584 C4.83695688,10.3567979 4.67410088,11.8641162 4.90337972,12.986202 C4.9673017,12.9179785 5.01931959,12.8678613 5.06553548,12.8128424 C5.7418347,12.0049646 6.41776712,11.1969534 7.09333276,10.3888089 C7.13123253,10.3376867 7.17350626,10.2899572 7.2196762,10.2461598 C7.35972436,10.1284193 7.51547792,10.1009099 7.664029,10.2189505 C7.79888475,10.3133347 7.8332802,10.4983493 7.74135559,10.6348935 C7.7103761,10.6901996 7.67409301,10.7423628 7.63301833,10.790647 C6.77212231,11.8220017 5.91045935,12.852356 5.04802946,13.8817099 C4.81715007,14.1574047 4.57966841,14.149502 4.37659858,13.8490987 C3.61300268,12.7189768 2.85200767,11.5873877 2.09361356,10.4543314 C1.95006419,10.2401577 1.97437255,10.0455908 2.1475321,9.93415252 C2.32069164,9.8227142 2.50825613,9.87163102 2.65260577,10.0842041 C3.05834529,10.6798089 3.45828281,11.279115 3.86082123,11.8768205 C3.93177896,11.9819233 4.00300345,12.0869261 4.0744947,12.1918288 L4.15402205,12.1824256 Z M19.020534,12.1862831 C18.9496097,12.2639098 18.8976918,12.3171281 18.8499754,12.3742477 C18.1919491,13.1600513 17.5336894,13.945588 16.8751963,14.7308581 C16.8208072,14.811917 16.7411492,14.8727243 16.6486184,14.9038175 C16.5299915,14.9212318 16.4092522,14.8916571 16.3121027,14.8213892 C16.2453798,14.756867 16.2341759,14.6062152 16.2457799,14.4985782 C16.2728158,14.4111906 16.3224773,14.3325053 16.3897294,14.2704998 C17.2311521,13.2605525 18.0740419,12.2514722 18.9183989,11.2432588 C19.2000958,10.9062429 19.409968,10.9115447 19.6535517,11.2723688 C20.4048767,12.3848847 21.1540343,13.4984009 21.9010245,14.6129175 C22.0445739,14.8264909 22.0300689,15.0217581 21.8699138,15.1393985 C21.6972545,15.2655419 21.5035879,15.2184257 21.349735,14.9927481 C20.8568655,14.2688992 20.3693979,13.541149 19.8792293,12.8151993 C19.8448175,12.7643819 19.8092052,12.7151649 19.7551867,12.6385386 C19.7087707,13.0329742 19.6788604,13.3951988 19.6207404,13.7527217 C19.3561494,15.3740792 18.6063916,16.7523532 17.455896,17.9100513 C16.2987981,19.0743516 14.9085201,19.8330125 13.2787597,20.0942023 C10.7584931,20.4977411 8.56583909,19.7940991 6.6990972,18.0661049 C6.52563755,17.9054497 6.50623088,17.70298 6.63577542,17.5619315 C6.77372286,17.41188 6.97659262,17.4100793 7.16185632,17.5851395 C7.74136407,18.1486325 8.41731037,18.6035325 9.15754256,18.9282014 C11.3965124,19.8798286 13.5780626,19.7506842 15.6541765,18.4791469 C17.2771346,17.4850051 18.3422008,16.0446098 18.8437733,14.2047772 C19.0103362,13.6051444 19.0779141,12.9823461 19.0438421,12.3609431 C19.0412412,12.3144271 19.0317379,12.2678111 19.020534,12.1862831 Z" style="fill-rule: evenodd;"></path>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        <h4 class="step title">Connect</h4>
+                        <div class="step description">
+                            Connect our bot to your Facebook page with one click. </div>
+                    </div>
+                    <div class="zoom step block zoomed">
+                        <div class="step icon">
+                            <div class="icon ">
+                                <svg class="ic_line-advertisement" viewBox="0 0 24 24" xmlns="#">
+                                    <g>
+                                        <path class="container" d="M0 0h24v24H0z"></path>
+                                        <path class="main" d="M3.82721052,13.6018044 C3.67656306,13.6091104 3.55483085,13.6235166 3.43361315,13.6194005 C2.66352053,13.6107288 2.03793286,12.9950473 2.01697129,12.2251911 C1.99814036,11.7580194 1.99577363,11.2895099 2.00596086,10.8223381 C2.00682031,10.4505411 2.15668211,10.0946046 2.42201804,9.83416154 C2.68735397,9.57371847 3.04601774,9.43050667 3.41776635,9.4365666 C4.42877138,9.43142153 5.44018801,9.42514456 6.45109013,9.44901765 C8.06540534,9.48698822 9.52475122,9.01024662 10.8715231,8.17911302 C11.4513718,7.82122238 11.9922209,7.39994456 12.5417137,6.99574835 C12.8287054,6.78449204 13.1899917,6.78027308 13.5308008,7.01818083 C13.8985151,7.2552336 14.1162962,7.66662386 14.1056073,8.10399509 C14.1056073,8.74362941 14.1149713,9.38326374 14.1175438,10.0228981 C14.1138352,10.0961682 14.1055181,10.1691323 14.0926417,10.2413575 C14.9645242,10.410733 15.4161579,10.8823295 15.4205827,11.5893642 C15.4240813,12.1389599 15.0340855,12.8144039 14.0705179,12.9015612 C14.104105,12.9746468 14.1272112,13.0521061 14.1391531,13.1316485 C14.150335,13.7780743 14.1565434,14.4245687 14.1577782,15.0711317 C14.1681874,15.6401483 13.7826364,16.1403087 13.2297116,16.2750766 C13.0074501,16.334667 12.7701626,16.2758213 12.6014993,16.1192841 C11.5070414,15.2170457 10.3336581,14.4397295 8.97515551,14.0026049 C8.46013463,13.8369338 7.91763911,13.7582143 7.38646272,13.6459491 C7.28728201,13.6337711 7.18726153,13.6298474 7.08743162,13.6342183 C7.02044289,14.2529637 6.95427737,14.8587435 6.88914086,15.4649349 C6.80400721,16.2570003 6.71907935,17.0490314 6.6343573,17.8410282 C6.58877204,18.2629235 6.30764576,18.5294378 5.88430991,18.5338625 C5.37542881,18.539282 4.8664448,18.5372583 4.35735789,18.5277913 C3.92177679,18.5202795 3.5426885,18.2046813 3.39667159,17.7418314 C3.3021208,17.4802786 3.30015941,17.1942056 3.39111492,16.931381 C3.45638806,16.7666279 3.47320418,16.5866489 3.43958142,16.4126556 C3.4352041,16.3923762 3.43426492,16.3715055 3.43680309,16.3509149 C3.51617427,15.8569887 3.59623146,15.3633027 3.67697466,14.8698568 C3.69731249,14.8199801 3.70910525,14.7670345 3.71185819,14.7132411 C3.62583273,14.3451632 3.68366324,13.9926234 3.82721052,13.6018044 Z M2.84964841,12.7437107 L2.90891954,12.7231304 C3.07911825,12.9193632 3.30261982,12.9625817 3.54536393,12.9631991 C4.64568726,12.9655658 5.7463193,12.9837793 6.84623103,12.9710196 C7.83408327,12.959083 8.76935296,13.1871123 9.67941183,13.5529263 C10.8745072,14.032652 11.9387122,14.7339242 12.9378836,15.5389209 C13.0210824,15.6247409 13.1570629,15.6299534 13.2465874,15.5507546 C13.4533161,15.4138959 13.4992101,15.2111803 13.4970491,14.9784177 C13.4852155,13.7340325 13.4779095,12.4895445 13.468031,11.2451594 C13.4597989,10.1930968 13.4489942,9.14113704 13.4418941,8.0891773 C13.4511347,7.89257945 13.3597541,7.70477819 13.1993557,7.59072353 C13.1005764,7.50046588 12.9479575,7.50502303 12.8547394,7.60101365 C12.345481,7.97979325 11.8371487,8.363615 11.2993866,8.69969057 C9.74372513,9.67210762 8.0541891,10.1863053 6.18941219,10.1103641 C5.28285196,10.0734226 4.3742337,10.0968841 3.46664446,10.0976044 C2.9775547,10.0976044 2.66576383,10.4091894 2.66576383,10.8925167 C2.66576383,11.3256282 2.6554737,11.7597687 2.68366865,12.1917482 C2.69601681,12.3777937 2.7919208,12.5597232 2.84964841,12.7437107 Z M6.42032265,13.6325719 C5.90921202,13.6305139 5.42886887,13.6284558 4.94883442,13.6267065 C4.59670626,13.6253688 4.45984756,13.7112914 4.38462673,14.0568338 C4.34552425,14.2368082 4.38400932,14.4336583 4.37979037,14.6227909 C4.39024627,14.7476298 4.37790294,14.8733295 4.34336332,14.99375 C4.26297378,15.1756482 4.23965173,15.377653 4.27647749,15.5730841 C4.28068912,15.6971864 4.26281517,15.8210497 4.22368914,15.9388982 C4.1881882,16.1090969 4.08837396,16.2879393 4.11852403,16.444555 C4.16633546,16.6617557 4.13901745,16.8887527 4.04103937,17.0884083 C3.85170103,17.5020714 4.10926292,17.8675768 4.55647186,17.8695319 C4.96190288,17.8711783 5.36743681,17.8666507 5.77266203,17.8776611 C5.92145727,17.8817771 5.97599495,17.8349571 5.98957792,17.6857502 C6.0370154,17.1665104 6.09762425,16.6486083 6.15319094,16.1300887 C6.24106863,15.3050263 6.32935793,14.4803755 6.42011685,13.6325719 L6.42032265,13.6325719 Z M14.1724931,12.2057428 C14.5022609,12.1806962 14.7569157,11.9055837 14.7564565,11.5748664 C14.7559974,11.2441492 14.5005798,10.9697447 14.1707438,10.9456138 C14.1711554,11.365451 14.1716699,11.785494 14.1722873,12.2057428 L14.1724931,12.2057428 Z M18.7197004,5.07910921 C18.5214097,4.88164166 18.3904164,4.74879611 18.2566447,4.6184202 C18.0810951,4.44729538 18.0529002,4.25826574 18.1832761,4.10885308 C18.3093302,3.96427679 18.5235706,3.95563309 18.6937693,4.13190297 C19.0973277,4.52961369 19.4797209,4.94824378 19.8393692,5.38606371 C20.9854412,6.83354859 21.7058303,8.57156125 21.9198272,10.4053821 C22.2330587,13.0526203 21.6310862,15.4688451 20.0676042,17.6126903 C19.703025,18.1124818 19.260035,18.5555747 18.8409182,19.0136912 C18.7595615,19.1030529 18.6458565,19.1561819 18.5251141,19.1612516 C18.4078182,19.1433158 18.3065889,19.0694188 18.2537635,18.9631666 C18.2281699,18.8350405 18.2580845,18.7020702 18.3360845,18.5972497 C18.5998205,18.2843269 18.9093475,18.0096834 19.1695848,17.6937765 C20.7397554,15.7841346 21.4586237,13.5794748 21.3202215,11.0978048 C21.2038401,9.01240754 20.4497796,7.16213972 19.1253373,5.53732858 C18.9763362,5.35550203 18.8136493,5.18509752 18.7194946,5.07910921 L18.7197004,5.07910921 Z M16.2976102,15.922434 C18.4077788,13.7768325 18.651195,10.4178115 16.8724168,7.99039208 C16.6113562,7.6292086 16.2789851,7.31824095 15.9708987,6.99224971 C15.8149004,6.82760767 15.7706528,6.66440625 15.8742744,6.51581681 C15.9985791,6.3374889 16.2117906,6.30785333 16.3887808,6.48648994 C16.728355,6.8297686 17.0847021,7.16677027 17.3663429,7.55542839 C18.617005,9.28416981 19.0024732,11.1958697 18.5228503,13.2570851 C18.2139376,14.5730501 17.5069554,15.7618336 16.4981648,16.6615738 C16.3192195,16.8262159 16.1213404,16.833316 15.985202,16.6915181 C15.8426837,16.5431345 15.8679974,16.3500917 16.0522936,16.1696028 C16.1344088,16.0882079 16.2155979,16.004755 16.2976102,15.922434 Z" style="fill-rule: evenodd;"></path>
+    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        <h4 class="step title">Tell</h4>
+                        <div class="step description">
+                            Tell your customers that you can now take reservations via Facebook! </div>
+                    </div>
+                </div>
+                <a href="#tutorial?lang=en" class="ui new link">
+                    Learn More <span class="icon">
+                    <svg class="ic_icon-arrow-more" viewBox="0 0 24 24" xmlns="#">
+                        <g>
+                            <rect class="container"></rect>
+                            <path class="main" d="M12,2 C6.5,2 2,6.5 2,12 C2,17.5 6.5,22 12,22 C17.5,22 22,17.5 22,12 C22,6.5 17.5,2 12,2 L12,2 Z M12,18.0625 L10.9375,17 L15.1875,12.75 L6.375,12.75 L6.375,11.25 L15.1875,11.25 L10.9375,7 L12,5.9375 L18.0625,12 L12,18.0625 Z"></path>
+                        </g>
+                    </svg>
+                    </span>
+                </a>
+            </div>
+        </section>
+        
+        <div class="ui footer">
+            <div class="content container">
+                <div class="links ">
+                    <div class="link">
+                        <a href="#">About Us</a>
+                    </div>
+                    <div class="link">
+                        <a href="#">How Its Work</a>
+                    </div>
+                    
+                    <div class="link">
+                        <a href="#" target="_blank">Contact Us</a>
+                    </div>
+                    <div class="ui social link">
+                        <a href="#" target="_blank" class="facebook icon" title="Facebook"><i class="fa fa-facebook"></i></a>
+                        <a href="#" target="_blank" class="wordpress icon" title="Wordpress"><i class="fa fa-wordpress"></i></a>
+                        <a href="#" class="whatsapp icon" title="Whatsapp"><i class="fa fa-whatsapp"></i></a>
+                        <a href="#" target="_blank" class="email icon" title="Email"><i class="fa fa-envelope"></i></a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        
+        
+        <script type="text/javascript">
+      $(function() {
+        var $stickybar = $('.ui.stickybar'),
+            $navList = $stickybar.find('.nav.list .list'),
+            $navIndicator = $stickybar.find('.nav.indicator'),
+            $navAI = $navList.find('.ai.item'),
+            $navFeatures = $navList.find('.features.item')
+            $navHowitworks = $navList.find('.howitworks.item');
+
+        var lastScrollTop = 0;
+
+        /**
+         * Hide stickybar
+         */
+        function hideStickyBar() {
+          $stickybar.removeClass('shown');
+        }
+
+        /**
+         * Check if screensize fall into mobile
+         * @return boolean Is mobile screen
+         */
+        function isMobile() {
+          return $(window).innerWidth() <= 768;
+        }
+
+        /**
+         * Show stickybar
+         */
+        function showStickyBar() {
+          $stickybar.addClass('shown');
+        }
+
+        /**
+         * Change active state for the stickybar nav items
+         * @param  String item stickybar nav item
+         */
+        function toggleStickbarNavItem(item) {
+          var _offset = 0,
+              _padding = 32,
+              _width = 0.1;
+
+          $navList.children().removeClass('active');
+
+          if (item == 'ai') {
+            $navAI.addClass('active');
+            _width = $navAI.width() + _padding;
+          }
+          else if (item == 'features') {
+            $navFeatures.addClass('active');
+            _width = $navFeatures.width() + _padding;
+          }
+          else if (item == 'howitworks') {
+            $navHowitworks.addClass('active');
+            _width = $navHowitworks.width() + _padding;
+          }
+
+          switch (item) {
+            case 'ai':
+              _offset += $navFeatures.width() + _padding;
+
+            case 'features':
+              _offset += $navHowitworks.width() + _padding;
+
+            case 'howitworks':
+              break;
+
+            default:
+              break;
+          }
+
+          $navIndicator.css({'right':_offset, 'width':_width});
+        }
+
+        /**
+         * Event function on window scrolled
+         */
+        $(window).scroll(function() {
+          var _scrollTop = $(this).scrollTop();
+
+          if (isMobile()) {
+          }
+
+          else {
+            // Downward scroll
+            if (_scrollTop > lastScrollTop) {
+
+              if (_scrollTop > $('.ui.heroimage').height()) {
+                showStickyBar();
+              }
+            }
+            // Upward scroll
+            else {
+              if (_scrollTop <= $('.ui.heroimage').height()) {
+                hideStickyBar();
+              }
+            }
+
+            /* Stickybar */
+            if (_scrollTop >= $('#ai').offset().top) {
+              if (_scrollTop >= $('#features').offset().top) {
+                if (_scrollTop >= $('#how-it-works').offset().top) {
+                  if (_scrollTop >= $('#how-it-works').offset().top + $('#how-it-works').height()) {
+                    toggleStickbarNavItem();
+                  }
+                  else {
+                    toggleStickbarNavItem('howitworks');
+                  }
+                }
+                else {
+                  toggleStickbarNavItem('features');
+                }
+              }
+              else {
+                toggleStickbarNavItem('ai');
+              }
+            }
+          }
+
+          lastScrollTop = _scrollTop;
+        });
+
+        /**
+         * Event function on window resized
+         */
+        $(window).resize(function() {
+          if ($(this).innerWidth() <= 768) {
+            hideStickyBar();
+          }
+        });
+
+        hideStickyBar();
+      });
+    </script>
+        <script>
+      $(function(){
+        // language
+        function resolve(url, base_url) {
+          var doc      = document
+          , old_base = doc.getElementsByTagName('base')[0]
+          , old_href = old_base && old_base.href
+          , doc_head = doc.head || doc.getElementsByTagName('head')[0]
+          , our_base = old_base || doc_head.appendChild(doc.createElement('base'))
+          , resolver = doc.createElement('a')
+          , resolved_url
+          ;
+          our_base.href = base_url || '';
+          resolver.href = url;
+          resolved_url  = resolver.href; // browser magic at work here
+
+          if (old_base) old_base.href = old_href;
+          else doc_head.removeChild(our_base);
+          return resolved_url;
+        }
+        function updateUrlParameter(uri, key, value) {
+          // remove the hash part before operating on the uri
+          var i = uri.indexOf('#');
+          var hash = i === -1 ? ''  : uri.substr(i);
+          uri = i === -1 ? uri : uri.substr(0, i);
+
+          var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+          var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+          if (uri.match(re)) {
+            uri = uri.replace(re, '$1' + key + "=" + value + '$2');
+          } else {
+            uri = uri + separator + key + "=" + value;
+          }
+          return uri + hash;  // finally append the hash as well
+        }
+        function getParameterByName(name, url) {
+          if (!url) url = window.location.href;
+          name = name.replace(/[\[\]]/g, "\\$&");
+          var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+          results = regex.exec(url);
+          if (!results) return null;
+          if (!results[2]) return '';
+          return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+        var lang = getParameterByName('lang',window.location.href) || 'en';//get from cookie maybe
+        $('a')
+        .filter(function(i,v){return v.href&&resolve(v.href).search('#')!==-1;})
+        .each(function(i,v){v.href=updateUrlParameter(resolve(v.href),'lang',$(v).data('lang')||lang);});
+      });
+    </script>
+        <script type="text/javascript">
+      $(function() {
+        var heroimage = $('.ui.heroimage'),
+            $feature = $('.bbb.feature'),
+            $experience = $('.bbb.experience'),
+            $startnow = $('.bbb.startnow');
+
+        var wasMobile = isMobile();
+        var os = new OnScreen();
+
+        /**
+         * Format a date to DD MMM
+         * @param  Date   date Date
+         * @return String      Date string
+         */
+        function getFormatedDate(date) {
+          var monthNames = [
+            "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+          ];
+
+          var day = date.getDate();
+          var monthIndex = date.getMonth();
+
+          return day + ' ' + monthNames[monthIndex];
+        }
+
+        /**
+         * Get today's next day-of-week
+         * @param  int dayOfWeek Day of week
+         * @return Date           The next day-of-week
+         */
+        function getNextDayOfWeek(dayOfWeek) {
+          var resultDate = new Date();
+          resultDate.setDate(resultDate.getDate() + (7 + dayOfWeek - resultDate.getDay()) % 7);
+          return resultDate;
+        }
+
+        /**
+         * Initialize playground
+         */
+        function initPlayground() {
+          var _$playground = $('#playground'),
+              _$messenger = _$playground.find('.messenger'),
+              _$messages = _$messenger.find('.message'),
+              _$chatbot = _$playground.find('.chatbot'),
+              _$logoCircles = _$chatbot.find('.logo.circle'),
+              _$data = _$playground.find('.data').first(),
+              _$dataItems = _$data.find('.data.item'),
+              _$booking = _$playground.find('.booking'),
+              _$control = $('.animation.control');
+
+          var _delay = 0,
+              _bounceDuration = 500,
+              _fadeDuration = 1000,
+              _pauseDuration = 500,
+              _posDuration = isFullScreen() ? 500 : 0,
+              _processDuration = 1000,
+              _shrinkDuration = 500,
+              _typingDuration = 1000,
+              _totalDuration = 0;
+
+          var _anims = [
+            {
+              desc: 'Control disappears',
+              anim: function() {
+                _$control.removeClass('shown');
+              },
+              delay: 0,
+              duration: _fadeDuration
+            },
+            {
+              desc: 'Avatar of message 1 appears',
+              anim: function() {
+                $(_$messages[0]).find('.avatar').addClass('bounced');
+              },
+              delay: _fadeDuration/-2,
+              duration: _bounceDuration
+            },
+            {
+              desc: 'Typing bubble of message 1 appears',
+              anim: function() {
+                $(_$messages[0]).find('.typing.bubble').addClass('bounced');
+              },
+              delay: _bounceDuration/-2,
+              duration: _typingDuration
+            },
+            {
+              desc: 'Bubble of message 1 appears',
+              anim: function() {
+                $(_$messages[0]).find('.typing.bubble').addClass('typed');
+                $(_$messages[0]).find('.bubble').addClass('bounced');
+              },
+              delay: 0,
+              duration: _bounceDuration
+            },
+            {
+              desc: 'Messenger moves from center to left',
+              anim: function() {
+                _$messenger.addClass('left-of-2').removeClass('center');
+              },
+              delay: _pauseDuration,
+              duration: _posDuration
+            },
+            {
+              desc: 'Chatbot appears',
+              anim: function() {
+                _$chatbot.addClass('fadedin');
+              },
+              delay: _posDuration*-1,
+              duration: _fadeDuration
+            },
+            {
+              desc: 'Chatbot processing',
+              anim: function() {
+                _$logoCircles.addClass('blink');
+                setTimeout(function() {
+                  _$logoCircles.removeClass('blink');
+                }, _processDuration);
+              },
+              delay: _fadeDuration*-1,
+              duration: _processDuration
+            },
+            {
+              desc: 'Messenger moves from left to leftest',
+              anim: function() {
+                _$messenger.addClass('left-of-3').removeClass('left-of-2');
+              },
+              delay: 0,
+              duration: _posDuration
+            },
+            {
+              desc: 'Chatbot moves from right to center',
+              anim: function() {
+                _$chatbot.addClass('center').removeClass('right-of-2');
+              },
+              delay: _posDuration*-1,
+              duration: _posDuration
+            },
+            {
+              desc: 'Data appears',
+              anim: function() {
+                _$data.find('.data.list').addClass('fadedin');
+              },
+              delay: 0,
+              duration: _fadeDuration
+            },
+            {
+              desc: 'Content of data 1 appears',
+              anim: function() {
+                $(_$dataItems[0]).find('.content').addClass('fadedin');
+              },
+              delay: _fadeDuration*-1,
+              duration: _fadeDuration
+            },
+            {
+              desc: 'Positive icon of data 1 appears',
+              anim: function() {
+                $(_$dataItems[0]).find('.positive.icon').addClass('bounced');
+              },
+              delay: _fadeDuration/-2,
+              duration: _bounceDuration
+            },
+            {
+              desc: 'Content of data 2 appears',
+              anim: function() {
+                $(_$dataItems[1]).find('.content').addClass('fadedin');
+              },
+              delay: 0,
+              duration: _fadeDuration
+            },
+            {
+              desc: 'Positive icon of data 2 appears',
+              anim: function() {
+                $(_$dataItems[1]).find('.positive.icon').addClass('bounced');
+              },
+              delay: _fadeDuration/-2,
+              duration: _bounceDuration
+            },
+            {
+              desc: 'Content of data 3 appears',
+              anim: function() {
+                $(_$dataItems[2]).find('.content').addClass('fadedin');
+              },
+              delay: 0,
+              duration: _fadeDuration
+            },
+            {
+              desc: 'Negative icon of data 3 appears',
+              anim: function() {
+                $(_$dataItems[2]).find('.negative.icon').addClass('bounced');
+              },
+              delay: _fadeDuration/-2,
+              duration: _bounceDuration
+            },
+            {
+              desc: 'Chatbot processing',
+              anim: function() {
+                _$logoCircles.addClass('blink');
+                setTimeout(function() {
+                  _$logoCircles.removeClass('blink');
+                }, _processDuration);
+              },
+              delay: _pauseDuration,
+              duration: _processDuration
+            },
+            {
+              desc: 'Messager moves upwards',
+              anim: function() {
+                _$messenger.removeClass('v-center');
+              },
+              delay: _pauseDuration,
+              duration: _posDuration
+            },
+            {
+              desc: 'Avatar of message 2 appears',
+              anim: function() {
+                $(_$messages[1]).find('.avatar').addClass('bounced');
+              },
+              delay: 0,
+              duration: _bounceDuration
+            },
+            {
+              desc: 'Bubble of message 2 appears',
+              anim: function() {
+                $(_$messages[1]).find('.bubble').addClass('bounced');
+              },
+              delay: _bounceDuration/-2,
+              duration: _bounceDuration
+            },
+            {
+              desc: 'Avatar of message 3 appears',
+              anim: function() {
+                $(_$messages[2]).find('.avatar').addClass('bounced');
+              },
+              delay: _pauseDuration,
+              duration: _bounceDuration
+            },
+            {
+              desc: 'Typing bubble of message 3 appears',
+              anim: function() {
+                $(_$messages[2]).find('.typing.bubble').addClass('bounced');
+              },
+              delay: _bounceDuration/-2,
+              duration: _typingDuration
+            },
+            {
+              desc: 'Bubble of message 3 appears',
+              anim: function() {
+                $(_$messages[2]).find('.typing.bubble').addClass('typed');
+                $(_$messages[2]).find('.bubble').addClass('bounced');
+              },
+              delay: 0,
+              duration: _bounceDuration
+            },
+            {
+              desc: 'Chatbot processing',
+              anim: function() {
+                _$logoCircles.addClass('blink');
+                setTimeout(function() {
+                  _$logoCircles.removeClass('blink');
+                }, _processDuration);
+              },
+              delay: _pauseDuration,
+              duration: _processDuration
+            },
+            {
+              desc: 'Negative icon of data 3 shrinkout',
+              anim: function() {
+                $(_$dataItems[2]).find('.negative.icon').removeClass('negative bounced').addClass('positive');
+              },
+              delay: 0,
+              duration: _shrinkDuration
+            },
+            {
+              desc: 'Positive icon of data 3 appears',
+              anim: function() {
+                $(_$dataItems[2]).find('.positive.icon').addClass('bounced');
+              },
+              delay: 0,
+              duration: _bounceDuration
+            },
+            {
+              desc: 'Chatbot processing',
+              anim: function() {
+                _$logoCircles.addClass('blink');
+                setTimeout(function() {
+                  _$logoCircles.removeClass('blink');
+                }, _processDuration);
+              },
+              delay: _pauseDuration,
+              duration: _processDuration
+            },
+            {
+              desc: 'Data disappears',
+              anim: function() {
+                _$data.addClass('fadedout');
+              },
+              delay: _pauseDuration,
+              duration: _fadeDuration
+            },
+            {
+              desc: 'Booking appears',
+              anim: function() {
+                _$booking.addClass('bounced');
+              },
+              delay: _fadeDuration/-2,
+              duration: _bounceDuration
+            },
+            {
+              desc: 'Control appears',
+              anim: function() {
+                _$control.addClass('shown');
+              },
+              delay: _pauseDuration*4,
+              duration: _fadeDuration
+            }
+          ];
+
+          _$playground.find('.booking.block .update.details > .booking.details > .date').html(getFormatedDate(getNextDayOfWeek(5)));
+
+          /* Clean up */
+          _$playground.find('.bounce').removeClass('bounced');
+          _$playground.find('.fadein').removeClass('fadedin');
+          _$playground.find('.fadeout').removeClass('fadedout');
+          $(_$dataItems[2]).find('.positive.icon').removeClass('positive').addClass('negative');
+          _$messenger.removeClass('left-of-3').addClass('center v-center');
+          _$chatbot.removeClass('center').addClass('right-of-2');
+
+          if (isMobile()) {
+            $('html, body').animate({
+              scrollTop: _$playground.parent().find('.header').offset().top
+            }, 500);
+          }
+
+          for (var i = 0; i < _anims.length; i++) {
+            // Convert animation delay to absolute time value
+            if (i > 0) {
+              _anims[i].delay += _anims[i-1].delay + _anims[i-1].duration;
+            }
+
+            // Play animations
+            window.setTimeout(function() {
+              _anims[this.i].anim();
+            }.bind({i:i}), _anims[i].delay);
+          }
+        }
+
+        /**
+         * Check if screensize fall into fullscreen
+         * @return boolean is fullscreen
+         */
+        function isFullScreen() {
+          return $(window).innerWidth() > 984;
+        }
+
+        /**
+         * Check if screensize fall into mobile
+         * @return boolean Is mobile screen
+         */
+        function isMobile() {
+          return $(window).innerWidth() <= 768;
+        }
+
+        /**
+         * Load background images
+         */
+        function loadBackgrounds() {
+          loadHeroimageBackground();
+          loadStartnowBackground();
+        }
+
+        /**
+         * Load features images
+         */
+        function loadFeaturesImages() {
+          for (var i = 0; i < $feature.length; i++) {
+            loadImgProgressively($feature[i]);
+          }
+        }
+
+        /**
+         * Load background image of heroimage
+         */
+        function loadHeroimageBackground() {
+          if (isMobile()) {
+            loadImgProgressively(heroimage[0], true);
+          }
+          else {
+            loadImgProgressively(heroimage[0]);
+          }
+        }
+
+        /**
+         * Load images progressively:load a small blurry image first,
+         * then transition to the large image
+         * @param  Object  element  DOM element holding the image
+         * @param  boolean isMobile True to load a smaller version
+         */
+        function loadImgProgressively(element, isMobile) {
+          isMobile = (typeof isMobile === 'undefined') ? false : isMobile;
+
+          var _placeholder = element.querySelector('.background.placeholder'),
+              imgTiny = _placeholder.querySelector('.img-tiny');
+
+          // 1: load small image and show it
+          var _img = new Image();
+          _img.src = imgTiny.src;
+          _img.onload = function () {
+            imgTiny.classList.add('loaded');
+          };
+
+          // 2: load large image
+          var _imgLarge = new Image();
+          if (isMobile) {
+            _imgLarge.src = _placeholder.dataset.mid;
+          }
+          else {
+            _imgLarge.src = _placeholder.dataset.large;
+          }
+          _imgLarge.onload = function () {
+            _imgLarge.classList.add('loaded');
+            imgTiny.classList.add('hidden');
+
+            // 3: load animation
+            if (_placeholder.dataset.anim) {
+              var _anim = new Image();
+              _anim.src = _placeholder.dataset.anim;
+              _anim.onload = function () {
+                _anim.classList.add('loaded');
+              };
+
+              _placeholder.appendChild(_anim);
+            }
+          };
+
+          _placeholder.appendChild(_imgLarge);
+        }
+
+        /**
+         * Load startnow background image
+         */
+        function loadStartnowBackground() {
+          if (isMobile()) {
+            loadImgProgressively($startnow[0], true);
+          }
+          else {
+            loadImgProgressively($startnow[0]);
+          }
+        }
+
+        /**
+         * Enable/disable scroll
+         */
+        function toggleDisableScroll() {
+          $('body').toggleClass('disable-scroll');
+        }
+
+        /**
+         * Event function on replay clicked
+         */
+        $('.animation.control .ui.link').click(function() {
+          initPlayground();
+        });
+
+        /**
+         *  Event function of zoom elements entering the viewport
+         */
+        os.on('enter', '.zoom', function(element, event) {
+          element.classList.add('zoomed');
+
+          // // Stop tracking event of entering viewport
+          // os.off('enter', '.zoom');
+        });
+
+        /**
+         *  Event function of zoom elements leaving the viewport
+         */
+        os.on('leave', '.zoom', function(element, event) {
+        });
+
+
+        /**
+         *  Event function of zoom elements entering the viewport
+         */
+        os.on('enter', '.animation.control', function(element, event) {
+          initPlayground();
+
+          // Stop tracking event of entering viewport
+          os.off('enter', '.animation.control');
+        });
+
+        /**
+         *  Event function of animation control leaving the viewport
+         */
+        os.on('leave', '.animation.control', function(element, event) {
+        });
+
+        /**
+         * Event function on window resized
+         */
+        $(window).resize(function() {
+          // If page is loaded in mobile screen size...
+          if (wasMobile) {
+            // ...but window resized to desktop
+            if ($(this).innerWidth() > 768) {
+              wasMobile = !wasMobile;
+              loadBackgrounds();
+            }
+          }
+        });
+
+        loadBackgrounds();
+        loadFeaturesImages();
+      });
+    </script>
+        <script>/* <![CDATA[ */(function(d,s,a,i,j,r,l,m,t){try{l=d.getElementsByTagName('a');t=d.createElement('textarea');for(i=0;l.length-i;i++){try{a=l[i].href;s=a.indexOf('/cdn-cgi/l/email-protection');m=a.length;if(a&&s>-1&&m>28){j=28+s;s='';if(j<m){r='0x'+a.substr(j,2)|0;for(j+=2;j<m&&a.charAt(j)!='X';j+=2)s+='%'+('0'+('0x'+a.substr(j,2)^r).toString(16)).slice(-2);j++;s=decodeURIComponent(s)+a.substr(j,m-j)}t.innerHTML=s.replace(/</g,'&lt;').replace(/\>/g,'&gt;');l[i].href='mailto:'+t.value}}catch(e){}}}catch(e){}})(document);/* ]]> */</script>
+        
+        
+        
+        </body>
+    </html>
