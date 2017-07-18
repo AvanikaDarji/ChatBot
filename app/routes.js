@@ -1,3 +1,4 @@
+var User     = require('../app/models/user');
 module.exports = function(app, passport) {
 
     // route for home page
@@ -29,6 +30,14 @@ module.exports = function(app, passport) {
             successRedirect : '/profile',
             failureRedirect : '/'
         }));
+app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+
+    // the callback after google has authenticated the user
+    app.get('/auth/google/callback',
+            passport.authenticate('google', {
+                    successRedirect : '/profile',
+                    failureRedirect : '/'
+            }));
 
     // route for logging out
     app.get('/logout', function(req, res) {
@@ -43,6 +52,23 @@ module.exports = function(app, passport) {
         //req.logout();
         res.render('bookingInfo.ejs');
     });
+
+   /* app.post("/addRequirements", (req, res) => {
+  var newUser = new User(req.body);
+ newUser.openingHour = req.body.openingHour;
+ newUser.closingHour = req.body.closingHour;
+ newUser.closingHour = req.body.closingHour;
+newUser.day=req.body.closingHour;
+newUser.MaximumPerson=req.body.MaximumPerson;
+
+  newUser.save()
+    .then(item => {
+      res.send("item saved to database");
+    })
+    .catch(err => {
+      res.status(400).send("unable to save to database");
+    });
+});*/
 
 };
 

@@ -14,7 +14,11 @@ var userSchema = mongoose.Schema({
         id           : String,
         token        : String,
         email        : String,
-        name         : String
+        name         : String,
+        openingHour  : Number,
+        closingHour  : Number,
+        day           :String,
+        MaximumPerson:{ type: Number, default: 0 }
     },
     twitter          : {
         id           : String,
@@ -27,8 +31,8 @@ var userSchema = mongoose.Schema({
         token        : String,
         email        : String,
         name         : String
-    }
-
+    },
+     
 });
 
 // methods ======================
