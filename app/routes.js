@@ -53,7 +53,7 @@ app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'e
         res.render('bookingInfo.ejs');
     });
 
-   /* app.post("/addRequirements", (req, res) => {
+   app.post("/addRequirements", (req, res) => {
   var newUser = new User(req.body);
  newUser.openingHour = req.body.openingHour;
  newUser.closingHour = req.body.closingHour;
@@ -63,12 +63,12 @@ newUser.MaximumPerson=req.body.MaximumPerson;
 
   newUser.save()
     .then(item => {
-      res.send("item saved to database");
+      res.send("items saved to database");
     })
     .catch(err => {
       res.status(400).send("unable to save to database");
     });
-});*/
+});
 
 };
 

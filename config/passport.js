@@ -107,7 +107,7 @@ module.exports = function(passport) {
                     var newUser            = new User();
 
                     // set all of the facebook information in our user model
-                    newUser.facebook.id    = profile.id; // set the users facebook id                   
+                   /* newUser.facebook.id    = profile.id; // set the users facebook id                   
                     newUser.facebook.token = token; // we will save the token that facebook provides to the user                    
                     newUser.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName; // look at the passport user profile to see how names are returned
                     newUser.facebook.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
@@ -115,17 +115,23 @@ module.exports = function(passport) {
                     newUser.facebook.openingHour = profile.openingHour;
                     newUser.facebook.closingHour = profile.closingHour;
                     newUser.facebook.day=profile.day;
-                    newUser.facebook.MaximumPerson=profile.MaximumPerson;
+                    newUser.facebook.MaximumPerson=profile.MaximumPerson;*/
  
- 
+  /*newUser.save()
+    .then(item => {
+      res.send("item saved to database");
+    })
+    .catch(err => {
+      res.status(400).send("unable to save to database");
+    });*/
                     // save our user to the database
-                    newUser.save(function(err) {
+                   /* newUser.save(function(err) {
                         if (err)
                             throw err;
 
                         // if successful, return the new user
                         return done(null, newUser);
-                    });
+                    });*/
                 }
 
             });
