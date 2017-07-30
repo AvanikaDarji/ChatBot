@@ -1,13 +1,14 @@
-// load all the things we need
+// load all packages
+
+
 var LocalStrategy    = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
-// load up the user model
-var User       = require('../app/models/user');
-
 // load the auth variables
 var configAuth = require('./auth');
+
+var User  = require('../app/models/user');
 
 module.exports = function(passport) {
 
@@ -33,11 +34,11 @@ module.exports = function(passport) {
     },
     function(token, refreshToken, profile, done) {
 
-        // make the code asynchronous
-        // User.findOne won't fire until we have all our data back from Google
+    
+
         process.nextTick(function() {
 
-            // try to find the user based on their google id
+            
             User.findOne({ 'google.id' : profile.id }, function(err, user) {
                 if (err)
                     return done(err);
@@ -69,12 +70,9 @@ module.exports = function(passport) {
     }));
 
 
-    // code for login (use('local-login', new LocalStategy))
-    // code for signup (use('local-signup', new LocalStategy))
-
-    // =========================================================================
-    // FACEBOOK ================================================================
-    // =========================================================================
+    /*
+    for facebook login WebAuthentication
+    */
     passport.use(new FacebookStrategy({
 
         // pull in our app id and secret from our auth.js file
@@ -85,25 +83,24 @@ module.exports = function(passport) {
 
     },
 
-    // facebook will send back the token and profile
     function(token, refreshToken, profile, done) {
 
-        // asynchronous
+       
         process.nextTick(function() {
 
-            // find the user in the database based on their facebook id
+            // find the user 
             User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
 
-                // if there is an error, stop everything and return that
-                // ie an error connecting to the database
+                
                 if (err)
                     return done(err);
 
-                // if the user is found, then log them in
+                // if the user found then log in 
+                
                 if (user) {
-                    return done(null, user); // user found, return that user
+                    return done(null, user); 
                 } else {
-                    // if there is no user found with that facebook id, create them
+                    
                     var newUser            = new User();
 
                     // set all of the facebook information in our user model

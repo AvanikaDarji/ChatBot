@@ -5,12 +5,6 @@ module.exports = function(app, passport) {
     app.get('/', function(req, res) {
         res.render('index.ejs'); // load the index.ejs file
     });
-
-    // route for login form
-    // route for processing the login form
-    // route for signup form
-    // route for processing the signup form
-
     // route for showing the profile page
     app.get('/profile', isLoggedIn, function(req, res) {
         res.render('profile.ejs', {
@@ -18,9 +12,6 @@ module.exports = function(app, passport) {
         });
     });
 
-    // =====================================
-    // FACEBOOK ROUTES =====================
-    // =====================================
     // route for facebook authentication and login
     app.get('/auth/facebook', passport.authenticate('facebook', { scope : ['email'] }));
 
@@ -63,7 +54,7 @@ newUser.MaximumPerson=req.body.MaximumPerson;
 
   newUser.save()
     .then(item => {
-      res.send("items saved to database");
+      res.render('thanks.ejs');
     })
     .catch(err => {
       res.status(400).send("unable to save to database");
